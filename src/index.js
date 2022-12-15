@@ -21,7 +21,7 @@ function createBioCard(user) {
   </section>
     `;
 }
-
+function filterByName(searchLetters, listOfUsers) {
   return listOfUsers.filter((person) => person.name.includes(searchLetters));
 }
 
