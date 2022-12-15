@@ -35,7 +35,13 @@ root.classList.add(
 );
 
 const bioCards = people.map(createBioCard).join(" ");
+let letters = "";
 
 root.innerHTML = bioCards;
 
-console.log(filterByName("L", people));
+search.addEventListener("keydown", (event) => {
+  letters += event.key;
+  const filteredUsers = filterByName(people, letters);
+
+  console.log(filteredUsers);
+});
