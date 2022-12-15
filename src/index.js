@@ -37,7 +37,15 @@ root.classList.add(
 const bioCards = people.map(createBioCard).join(" ");
 let letters = "";
 
-root.innerHTML = bioCards;
+root.innerHTML = `
+<div>
+<label for="search" class="sr-only">Search</label>
+<input type="search" id="search" placeholder="🔍" />
+</div>
+<main class="items-center grid grid-cols-3 gap-4">
+  ${bioCards}
+</main
+`;
 
 search.addEventListener("keydown", (event) => {
   letters += event.key;
