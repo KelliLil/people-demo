@@ -1,3 +1,6 @@
 export default function Search() {
-  return "</p> I'm a Search Card.</p>";
+  return `<div>
+  <label for="search" class="sr-only">Search</label>
+  <input type="search" id="search" placeholder="🔍" />
+  </div>`;
 }
