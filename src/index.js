@@ -28,6 +28,13 @@ function renderCards(currentUsers) {
   main.innerHTML = currentUsers.map(createBioCard).join("");
 }
 
+function updateLetters(event) {
+  // Assumption:If starts with key, it is a letter
+  if (event.code.startsWith("Key")) {
+    letters += event.key;
+  }
+}
+
 // Business logic
 const resp = await fetch("https://jsonplaceholder.typicode.com/users");
 const users = await resp.json();
@@ -56,10 +63,7 @@ search.addEventListener(
 
   // Browser API models the event as an event object
   (event) => {
-    // += is shorthand for letters = letters + event.key
-    letters +=
-      // Can access info about the event such as what key they pressed
-      event.key;
+    updateLetters(event);
 
     const filteredUsers = filterByName(users, letters)
       .map(createBioCard)
