@@ -56,12 +56,7 @@ search.addEventListener(
 
   // Browser API models the event as an event object
   (event) => {
-    updateLetters(event);
-
-    const filteredUsers = filterByName(users, letters)
-      .map(createBioCard)
-      .join("");
-
+    const filteredUsers = filterByName(users, event.target.value);
     renderCards(filteredUsers);
   }
 );
