@@ -23,6 +23,11 @@ function filterByName(listOfUsers, searchLetters) {
   return listOfUsers.filter((user) => user.name.includes(searchLetters));
 }
 
+// Render the cards
+function renderCards(currentUsers) {
+  main.innerHTML = currentUsers.map(createBioCard).join("");
+}
+
 // Business logic
 const resp = await fetch("https://jsonplaceholder.typicode.com/users");
 const users = await resp.json();
@@ -41,6 +46,8 @@ root.innerHTML = `
 </main
 `;
 
+const main = document.querySelector("main");
+
 // ⚠️ 'input' doesn't exist until we update the 'root' 'innerHTML'
 const search = document.querySelector("input");
 
@@ -54,21 +61,13 @@ search.addEventListener(
       // Can access info about the event such as what key they pressed
       event.key;
 
-    const filteredUsersHTML = filterByName(users, letters)
+    const filteredUsers = filterByName(users, letters)
       .map(createBioCard)
       .join("");
 
     // need to take filteredUsers & turn them into HTML
     // need to update 'root' 'innerHTML' w/ new HTML
 
-    root.innerHTML = `
-<div>
-<label for="search" class="sr-only">Search</label>
-<input type="search" id="search" placeholder="🔍" />
-</div>
-<main class="items-center grid grid-cols-3 gap-4">
-  ${filteredUsersHTML}
-</main
-`;
+    renderCards(filteredUsers);
   }
 );
