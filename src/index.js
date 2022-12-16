@@ -1,6 +1,7 @@
 // Initial const
 const root = document.querySelector("#root");
 
+// This keeps track of what we type in the search bar
 let letters = "";
 
 // Function declarations/expressions
@@ -25,6 +26,7 @@ function filterByName(listOfUsers, searchLetters) {
 // Business logic
 const resp = await fetch("https://jsonplaceholder.typicode.com/users");
 const users = await resp.json();
+// Take array of users and 1-1 for each output the HTML string, Join array back into string
 const bioCardsHTML = users.map(createBioCard).join("");
 
 root.classList.add("flex", "flex-col", "gap-y-8", "items-center");
@@ -42,9 +44,17 @@ root.innerHTML = `
 // ⚠️ 'input' doesn't exist until we update the 'root' 'innerHTML'
 const search = document.querySelector("input");
 
-search.addEventListener("keydown", (event) => {
-  letters += event.key;
-  const filteredUsers = filterByName(users, letters);
+search.addEventListener(
+  "keydown",
 
-  console.log(filteredUsers);
-});
+  // Browser API models the event as an event object
+  (event) => {
+    // += is shorthand for letters = letters + event.key
+    letters +=
+      // Can access info about the event such as what key they pressed
+      event.key;
+    const filteredUsers = filterByName(users, letters);
+
+    console.log(filteredUsers);
+  }
+);
