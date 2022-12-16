@@ -2,7 +2,7 @@
 const root = document.querySelector("#root");
 
 // This keeps track of what we type in the search bar
-let letters = "";
+const letters = "";
 
 // Function declarations/expressions
 function createBioCard(user) {
@@ -26,13 +26,6 @@ function filterByName(listOfUsers, searchLetters) {
 // Render the cards
 function renderCards(currentUsers) {
   main.innerHTML = currentUsers.map(createBioCard).join("");
-}
-
-function updateLetters(event) {
-  // Assumption:If starts with key, it is a letter
-  if (event.code.startsWith("Key")) {
-    letters += event.key;
-  }
 }
 
 // Business logic
@@ -59,7 +52,7 @@ const main = document.querySelector("main");
 const search = document.querySelector("input");
 
 search.addEventListener(
-  "keydown",
+  "input",
 
   // Browser API models the event as an event object
   (event) => {
@@ -68,9 +61,6 @@ search.addEventListener(
     const filteredUsers = filterByName(users, letters)
       .map(createBioCard)
       .join("");
-
-    // need to take filteredUsers & turn them into HTML
-    // need to update 'root' 'innerHTML' w/ new HTML
 
     renderCards(filteredUsers);
   }
